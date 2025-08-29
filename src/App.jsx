@@ -11,8 +11,12 @@ function FilterableProductTable({products}) {
     <>
       <div className='container'>
         <h1> List Of Groceries </h1>
-        <SearchBar />
-        <ProductTable/>
+        <SearchBar 
+        filterText={filterText}  inStockOnly={inStockOnly} onFilterTextChange={setFilterText}
+        onInStockOnlyChange={setInStockOnly}/>
+        <ProductTable 
+        products={products} filterText={filterText}
+        inStockOnly={inStockOnly}/>
       </div>
     </>
   )
