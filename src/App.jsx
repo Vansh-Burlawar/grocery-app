@@ -38,4 +38,63 @@ function ProductRow({ product}){
     </tr>
   )
 }
-export default App
+
+
+function ProductTable({ products, filterText, inStockOnly}){
+  const rows=[];
+  let lastCategory= null;
+
+  products.forEach((products) => {
+    if(product.name.toLowerCase().indexOf(filterText.toLowerCase())===-1){
+      return ;
+    }
+    if(inStockOnly && !product.stocked){
+      return;
+    }
+    if(product.category != lastCategory){
+      rows.push(
+        <ProductCategoryRow
+        category={product.category}
+        key={product.category}/>
+      );
+    }
+    rows.push(
+      <ProductRow
+      product={product}
+      key ={product.name}/>
+    );
+    lastCategory = product.category;
+  });
+
+  return(
+    <table className='product-table'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>{rows}</tbody>
+    </table>
+  );
+}
+
+function SearchBar({
+  filterText,inStockOnly,onFilterTextChange,onInStockOnlyChange
+
+}){
+  return(
+    <form className='search-bar'>
+      <input className='searInput'type='text' value={filterText} placeholder='Search here' 
+      onChange={(e)=> onFilterTextChange(e.target.value)} />
+      <label className='stock-label'>
+        <input type="checkbox" checked ={inStockOnly} 
+        onChange={(e)=> onInStockOnlyChange(e.target.checked)} />
+        
+      </label>
+    </form>
+  )
+}
+export default function App(){
+  return <FilterableProductTable product={Products}/>
+} 
