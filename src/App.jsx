@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import PRODUCTS from './Products';
 import './App.css'
 
 function FilterableProductTable({products}) {
@@ -48,7 +48,7 @@ function ProductTable({ products, filterText, inStockOnly}){
   const rows=[];
   let lastCategory= null;
 
-  products.forEach((products) => {
+  products.forEach((product) => {
     if(product.name.toLowerCase().indexOf(filterText.toLowerCase())===-1){
       return ;
     }
@@ -94,11 +94,11 @@ function SearchBar({
       <label className='stock-label'>
         <input type="checkbox" checked ={inStockOnly} 
         onChange={(e)=> onInStockOnlyChange(e.target.checked)} />
-        
+         Products in Stock
       </label>
     </form>
   )
 }
 export default function App(){
-  return <FilterableProductTable product={Products}/>
+  return <FilterableProductTable product={PRODUCTS}/>
 } 
