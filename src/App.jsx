@@ -100,5 +100,5 @@ function SearchBar({
   )
 }
 export default function App(){
-  return <FilterableProductTable product={PRODUCTS}/>
+  return <FilterableProductTable products={PRODUCTS}/>
 } 
